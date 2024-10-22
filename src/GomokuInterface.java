@@ -5,5 +5,6 @@ public interface GomokuInterface extends Remote {
     void print() throws RemoteException;
     boolean jogar(int linha, int coluna) throws RemoteException;
     boolean verificarVencedor() throws RemoteException;
-    char getJogadorAtual() throws RemoteException;
+    public char getJogadorAtual() throws RemoteException;
+    char getProximoJogador() throws RemoteException;
 }

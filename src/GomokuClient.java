@@ -9,10 +9,21 @@ public class GomokuClient {
 
             Scanner scanner = new Scanner(System.in);
 
-            for (;;) {
+            char meuJogador = ' ';  // Define o jogador localmente
+
+            System.out.print("Você é o jogador X ou O? ");
+            meuJogador = scanner.next().charAt(0);
+
+            while (true) {
                 jogo.print();
 
-                System.out.println("Jogador " + jogo.getJogadorAtual() + ", faça sua jogada.");
+                // Espera até que seja a vez deste jogador
+                while (jogo.getProximoJogador() != meuJogador) {
+                    System.out.println("Aguardando o outro jogador...");
+                    Thread.sleep(1000);  // Aguarda 1 segundo antes de checar novamente
+                }
+
+                System.out.println("Sua vez, jogador " + meuJogador + ". Faça sua jogada.");
 
                 System.out.print("Linha (1 a 15): ");
                 int linha = scanner.nextInt();
@@ -22,6 +33,7 @@ public class GomokuClient {
 
                 if (jogo.jogar(linha, coluna)) {
                     if (jogo.verificarVencedor()) {
+                        System.out.println("Jogador " + meuJogador + " venceu!");
                         break;
                     }
                 }
